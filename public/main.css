@@ -1,0 +1,118 @@
+
+.container {
+  background-image: linear-gradient(to right, #060552, #090979, #073898, #056dbb, #0489ce, #02abe4);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  height: 20%;
+}
+
+input[name="item-entry"] {
+  width: 45%;
+  height: 40px;
+  border: 2px solid #E6E6FA;
+  margin-bottom: 30px;
+  border-radius: 2px;
+  font-size: 25px;
+  padding-left: 10px;
+}
+
+input[type="submit"] {
+  height: 40px;
+  width: 7%;
+  font-size: 20px;
+  margin-top: -10px;
+  border: none;
+  border-radius: 2px;
+  background-color:	#F5F5F5;
+}
+
+.submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: -10px;
+}
+
+.list {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.entry {
+  display: grid;
+  grid-template-columns: 0.8fr 0.1fr;
+  justify-content: center;
+  font-size: 25px;
+  margin: 10px;
+  text-align: center;
+  width: 30%;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 2px;
+  background-color: #6CB4EE;
+  border: 3px solid #002D62;
+}
+
+
+.item-button {
+  background-color: white;
+  border-radius: 50%;
+  border: none;
+}
+
+#editor-button {
+  height: 100%;
+  margin-bottom: 6px;
+  width: 45%;
+  margin-right: -15px;
+}
+
+#checkmark {
+  width: 70%;
+  margin-left: 20px;
+}
+
+h1 {
+  margin-bottom: -15px;
+  color: white;
+}
+
+h2 {
+  margin-bottom: 25px;
+  color: white;
+}
+
+#restore {
+  background-color: white;
+  border: 0.5px solid black;
+  border-radius: 1px;
+  margin-top: 10px;
+}
+
+.red-background {
+  background-color: red;
+}
+
+.hidden {
+  display: none;
+}
+
+#display {
+  display: grid;
+  grid-template-columns: 0.9fr 0.1fr;
+  margin-left: -10px;
+}
+
+#edit {
+  margin-right: -20px;
+}
+
+#display > label {
+  white-space: nowrap;
+  margin-left: -13px;
+}

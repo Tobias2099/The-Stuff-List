@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List</title>
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body>
+
+  <!--Re-organize each section into their own partial EJS sections-->
+  <!--Features to add/fix: editable items must have max char count, negative space on both sides must be filled with something, submit and restore buttons need to look better-->
+
+  <div class="container">
+
+    <% const date = new Date() %>
+    <% const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] %>
+    <% const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"] %>
+    <% const dateDisplay = days[date.getDay()] + " | " + months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear() %> 
+    
+    <h1>The Stuff List</h1>
+    <h2 id="date"><%= dateDisplay %></h2>
+    <form class="submit" action="/submit" method="POST">
+      <input name="item-entry" type="text" placeholder="What do you need to do?" maxlength="30" required/>
+      <input type="submit"/>
+    </form>
+    <% if (!locals.noTrash) { %>
+      <form class="submit" action="/restore" method="POST">
+        <button id="restore" name="restore">Restore</button>
+      </form>
+    <% } %>
+
+  </div>
+
+  <div class="list">
+
+    <% if(locals.itemList) { %>
+      <% let counter = 1 %>
+      <% itemList.forEach(item => { %>
+        <div class="entry">
+          <form id="display" method="POST" action="/clicked">
+            <label id="item-label-<%=counter%>" onfocusout="changedItem(<%=counter%>)" contenteditable="true" for="item"><%= item %></label>
+            <button name="item" id="checkmark" class="item-button" value='<%= item%>'><b>&#x2713</b></button>
+          </form>
+
+          <script>
+            function changedItem(counter) {
+              document.getElementById(`editor-${counter}`).value = document.getElementById(`item-label-${counter}`).innerHTML;
+            }
+         </script>
+
+          <form id="edit" method="POST" action="/edit">
+            <input id="editor-<%=counter%>" class="hidden" type="text" name="edit-input">
+            <button value='<%=item%>' id="editor-button" class="item-button" name="prev_item">&#9999</button>
+          </form>
+        </div>
+          <% counter++ %>
+      <% }); %>
+
+    <% } else { %>
+      <% console.log("list of items does not exist"); %>
+    <% } %>
+  </div>
+</body>
+</html>
