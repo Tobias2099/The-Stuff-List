@@ -8,8 +8,8 @@
 }
 
 input[name="item-entry"] {
-  width: 45%;
-  height: 40px;
+  width: 60%;
+  height: 50px;
   border: 2px solid #E6E6FA;
   margin-bottom: 30px;
   border-radius: 2px;
@@ -19,8 +19,9 @@ input[name="item-entry"] {
 
 input[type="submit"] {
   height: 40px;
-  width: 7%;
+  width: 10%;
   font-size: 20px;
+  font-weight: 600;
   margin-top: -10px;
   border: none;
   border-radius: 2px;
@@ -37,7 +38,7 @@ input[type="submit"] {
 }
 
 .list {
-  margin-top: 10px;
+  margin-top: 2%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,46 +46,52 @@ input[type="submit"] {
 
 .entry {
   display: grid;
-  grid-template-columns: 0.8fr 0.1fr;
+  grid-template-columns: 0.6fr 0.13fr 0.13fr;
   justify-content: center;
   font-size: 25px;
   margin: 10px;
   text-align: center;
-  width: 30%;
+  width: 50%;
   padding-top: 7px;
   padding-bottom: 7px;
   border-radius: 2px;
   background-color: #6CB4EE;
   border: 3px solid #002D62;
+  height: 40px;
 }
 
+.entry span {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: inline-block;
+  width: 100%; /* Set this to your preferred width */
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.entry span::-webkit-scrollbar {
+  display: none;
+}
 
 .item-button {
   background-color: white;
-  border-radius: 50%;
+  border-radius: 40%;
   border: none;
-}
-
-#editor-button {
-  height: 100%;
-  margin-bottom: 6px;
-  width: 45%;
-  margin-right: -15px;
-}
-
-#checkmark {
-  width: 70%;
-  margin-left: 20px;
 }
 
 h1 {
   margin-bottom: -15px;
   color: white;
+  font-size: 300%;
 }
 
 h2 {
   margin-bottom: 25px;
   color: white;
+  font-size: 160%;
+  font-weight: normal;
 }
 
 #restore {
@@ -92,27 +99,56 @@ h2 {
   border: 0.5px solid black;
   border-radius: 1px;
   margin-top: 10px;
-}
-
-.red-background {
-  background-color: red;
+  padding: 0.4%;
+  font-weight: 00;
 }
 
 .hidden {
   display: none;
 }
 
-#display {
-  display: grid;
-  grid-template-columns: 0.9fr 0.1fr;
-  margin-left: -10px;
+/* Container for Buttons */
+.btn-container {
+  margin-top: auto;
+  margin-bottom: auto;
+  height: 100%;
+  margin-left: 20%;
 }
 
-#edit {
-  margin-right: -20px;
+/* Styling Buttons within btn-container */
+.btn-container button {
+  height: 100%;
+  width: 50%;
+  margin-bottom: auto;
+  margin-top: auto;
+  background-color: #F5F5F5; /* Default background color */
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for hover effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Default shadow */
 }
 
+/* Hover Effect for Buttons */
+.btn-container button:hover {
+  transform: translateY(-5px); /* Moves the button up */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Enhanced shadow for levitation effect */
+  background-color: #002D62; /* Background color on hover */
+  color: white; /* Text color on hover */
+  border: 2px solid #002D62; /* Optional: border color on hover */
+}
 #display > label {
   white-space: nowrap;
   margin-left: -13px;
+}
+
+/*Styling for dragging entries*/
+/* Style for when an entry is being dragged */
+.entry.dragging {
+  opacity: 1;
+  background-color: white; /* Lighter color while dragging */
+}
+
+/* Optional: Style for potential drop targets */
+.entry.drop-target {
+  border: 5px solid rgb(69, 3, 250);
 }

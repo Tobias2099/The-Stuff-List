@@ -21,12 +21,13 @@ db.connect();
 
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get("/", async (req, res) => {
 
   const date = new Date();
 
-  const result = await db.query("SELECT entry FROM toDoList");
+  const result = await db.query("SELECT entry FROM toDoList ORDER BY entry_order ASC");
 
   const deletedData = await db.query("SELECT * FROM deleted_items");
   const deletedItems = deletedData.rows;
@@ -99,6 +100,31 @@ app.post("/edit", async (req, res) => {
   console.log("New item: " + new_item);
   const result = await db.query("UPDATE toDoList SET entry = ($1) WHERE entry = ($2)", [new_item, prev_item]);
   res.redirect("/");
+});
+
+app.post('/update-order', async (req, res) => {
+  const updatedOrder = req.body.order;
+  /*console.log("UPDATED ORDER");
+  updatedOrder.forEach(item => {
+    console.log("Item:", item);
+  });*/
+  const result = await db.query("SELECT id FROM todolist ORDER BY id ASC");
+  const idList = result.rows;
+
+  const updatePromises = updatedOrder.map(async item => {
+    const id = idList[item.id - 1].id;
+    const entry = item.entry;
+    console.log("ENTRY: " + entry);
+    console.log("ID: " + id + "ENTRY: " + "      ORDER:  " + item.order);
+    await db.query(`UPDATE todolist SET entry_order = $1 WHERE entry = $2`, [item.order, item.entry]);
+  });
+
+  // Wait for all update operations to complete
+  await Promise.all(updatePromises);
+
+  // Send a successful response
+  res.json({ success: true, message: "Order updated successfully" });
+  
 });
 
 app.listen(port, () => {
