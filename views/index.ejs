@@ -36,21 +36,23 @@
       <% itemList.forEach(item => { %>
         <div class="entry" draggable="true">
           <span id="item-label-<%=counter%>" onfocusout="changedItem(<%=counter%>)" contenteditable="true" for="item"><%= item %></span>
-          <form class="btn-container" method="POST" action="/clicked">
-            <!--<label id="item-label-<%=counter%>" onfocusout="changedItem(<%=counter%>)" contenteditable="true" for="item"><%= item %></label>-->
-            <button name="item" id="checkmark" class="item-button" value='<%= item%>'><b>&#x2713</b></button>
-          </form>
+          <div id="all-btns">
+            <form class="btn-container" method="POST" action="/clicked">
+              <!--<label id="item-label-<%=counter%>" onfocusout="changedItem(<%=counter%>)" contenteditable="true" for="item"><%= item %></label>-->
+              <button name="item" id="checkmark" class="item-button" value='<%= item%>'><b>&#x2713</b></button>
+            </form>
 
-          <script>
-            function changedItem(counter) {
-              document.getElementById(`editor-${counter}`).value = document.getElementById(`item-label-${counter}`).innerHTML;
-            }
-         </script>
+            <script>
+              function changedItem(counter) {
+                document.getElementById(`editor-${counter}`).value = document.getElementById(`item-label-${counter}`).innerHTML;
+              }
+          </script>
 
-          <form class="btn-container" method="POST" action="/edit">
-            <input id="editor-<%=counter%>" class="hidden" type="text" name="edit-input">
-            <button value='<%=item%>' id="editor-button" class="item-button" name="prev_item">&#9999</button>
-          </form>
+            <form class="btn-container" method="POST" action="/edit">
+              <input id="editor-<%=counter%>" class="hidden" type="text" name="edit-input">
+              <button value='<%=item%>' id="editor-button" class="item-button" name="prev_item">&#9999</button>
+            </form>
+        </div>
         </div>
           <% counter++ %>
       <% }); %>
